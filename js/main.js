@@ -230,7 +230,44 @@
     audioBtn.querySelector('.audio-off').style.display = audioOn ? 'none' : 'block';
   }
 
+  /* ---------- LEAFLET MAP ---------- */
+  function initMap() {
+    var el = document.getElementById('leafletMap');
+    if (!el || typeof L === 'undefined') return;
+    var lat = -27.051866, lng = -48.588336;
+    var map = L.map(el, {
+      center: [lat, lng],
+      zoom: 15,
+      zoomControl: false,
+      attributionControl: false,
+      dragging: false,
+      scrollWheelZoom: false,
+      doubleClickZoom: false,
+      touchZoom: false,
+      boxZoom: false,
+      keyboard: false
+    });
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+    var icon = L.divIcon({
+      className: 'map-pin',
+      html: '<svg viewBox="0 0 24 24" width="32" height="32" fill="#c9a96e" stroke="#8b6914" stroke-width="1"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3" fill="white"/></svg>',
+      iconSize: [32, 32],
+      iconAnchor: [16, 32]
+    });
+    L.marker([lat, lng], { icon: icon }).addTo(map);
+    // Fix map rendering when page becomes visible
+    var observer = new MutationObserver(function () {
+      var page = el.closest('.page');
+      if (page && page.classList.contains('active')) {
+        setTimeout(function () { map.invalidateSize(); }, 100);
+      }
+    });
+    var page3 = el.closest('.page');
+    if (page3) observer.observe(page3, { attributes: true, attributeFilter: ['class'] });
+  }
+
   /* ---------- GO ---------- */
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-  else init();
+  function boot() { init(); initMap(); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
 })();
