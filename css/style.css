@@ -652,8 +652,9 @@ html, body {
 
 /* ==================== PAGE 3: COMO CHEGAR ==================== */
 .location-body {
-  padding: 20px 26px 30px;
-  justify-content: center;
+  padding: 16px 26px 30px;
+  justify-content: flex-start;
+  padding-top: 30px;
   gap: 0;
 }
 
@@ -686,14 +687,47 @@ html, body {
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin-top: 4px;
+  margin-top: 8px;
+}
+
+.btn-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 20px;
+  background: white;
+  border: 1px solid rgba(26,58,92,0.15);
+  border-radius: 22px;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--blue-deep);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.btn-nav:hover {
+  background: var(--blue-deep);
+  color: white;
+  border-color: var(--blue-deep);
+}
+
+.location-hint {
+  font-family: var(--font-serif);
+  font-size: 12px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text-light);
+  margin-top: 14px;
+  margin-bottom: 6px;
 }
 
 .location-phone {
   display: flex;
   justify-content: center;
   gap: 12px;
-  margin-top: 12px;
 }
 
 .phone-link {
