@@ -5,7 +5,7 @@
   'use strict';
 
   var WEDDING = new Date('2026-04-17T16:00:00-03:00');
-  var PAGES = 3;
+  var PAGES = 5;
   var cur = 1;
   var flipping = false;
   var audioOn = false;
