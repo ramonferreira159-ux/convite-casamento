@@ -177,28 +177,21 @@ html, body {
   margin: 0 auto 30px;
 }
 
-.envelope-shell-img {
+.envelope-logo-wrap {
+  position: relative;
+  width: 160px; height: 160px;
+  margin: 0 auto 24px;
+}
+
+.envelope-logo {
   width: 100%; height: 100%;
   object-fit: contain;
-  filter: drop-shadow(0 4px 16px rgba(74,124,138,0.25));
-  animation: shellFloat 4s ease-in-out infinite;
+  animation: logoFloat 4s ease-in-out infinite;
 }
 
-@keyframes shellFloat {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-8px) rotate(3deg); }
-}
-
-.shell-glow {
-  position: absolute;
-  inset: -25px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(201,169,110,0.1) 0%, transparent 70%);
-  animation: glowPulse 3s ease-in-out infinite;
-}
-@keyframes glowPulse {
-  0%, 100% { opacity: 0.5; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.08); }
+@keyframes logoFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
 }
 
 .envelope-cta {
@@ -403,12 +396,17 @@ html, body {
   margin-bottom: auto;
 }
 
-.cover-top { margin-bottom: 10px; }
+.cover-top { margin-bottom: 6px; }
 
-.accent-starfish {
-  width: 50px;
+.cover-logo {
+  width: 80px;
+  opacity: 0.35;
+}
+
+.page-logo {
+  width: 70px;
   opacity: 0.25;
-  filter: saturate(0.6);
+  margin-bottom: 6px;
 }
 
 .cover-date-row {
