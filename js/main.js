@@ -195,7 +195,7 @@
     if (!btn) return;
     btn.addEventListener('click', function (e) {
       e.stopPropagation();
-      var key = 'ana.pedro@email.com';
+      var key = 'c1579833-e6d3-4cf1-a046-cfd3f73135c4';
       if (navigator.clipboard) {
         navigator.clipboard.writeText(key).then(function () { showToast('Chave PIX copiada!'); btn.textContent = 'Copiado!'; setTimeout(function () { btn.textContent = 'Copiar'; }, 2000); });
       } else {

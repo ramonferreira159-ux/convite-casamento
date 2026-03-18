@@ -859,8 +859,9 @@ html, body {
 
 /* ==================== PAGE 5: PRESENTE ==================== */
 .gift-body {
-  padding: 40px 30px;
-  justify-content: center;
+  padding: 30px 30px 60px;
+  justify-content: flex-start;
+  padding-top: 40px;
 }
 
 .gift-text {
