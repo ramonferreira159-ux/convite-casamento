@@ -491,7 +491,7 @@ html, body {
 
 .blessing {
   font-family: var(--font-serif);
-  font-size: 13px;
+  font-size: 15px;
   font-style: italic;
   font-weight: 300;
   color: var(--text-light);
@@ -510,7 +510,7 @@ html, body {
 
 .parents-col p {
   font-family: var(--font-serif);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 400;
   letter-spacing: 1px;
   color: var(--text);
