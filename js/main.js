@@ -9,7 +9,8 @@
   var cur = 1;
   var flipping = false;
   var audioOn = false;
-  var aCtx, osc, gain;
+  var introAudio = null;
+  var mainAudio = null;
   var tx0 = 0, ty0 = 0;
 
   var envelope = document.getElementById('envelope');
@@ -40,8 +41,21 @@
   /* ---------- ENVELOPE ---------- */
   function setupEnvelope() {
     if (!envelope) return;
+    // Auto-play intro on first user interaction anywhere
+    function startIntroOnce() {
+      if (!audioOn) playIntro();
+      document.removeEventListener('click', startIntroOnce);
+      document.removeEventListener('touchstart', startIntroOnce);
+    }
+    document.addEventListener('click', startIntroOnce);
+    document.addEventListener('touchstart', startIntroOnce);
+
     function open() {
+      // Start intro if not already playing
+      if (!audioOn) playIntro();
       envelope.classList.add('opening');
+      // Crossfade to main music
+      setTimeout(function () { crossfadeToMain(); }, 400);
       setTimeout(function () { envelope.classList.add('hidden'); }, 1000);
     }
     envelope.addEventListener('click', open);
@@ -209,22 +223,72 @@
   function showToast(m) { toastMsg.textContent = m; toast.classList.add('show'); setTimeout(function () { toast.classList.remove('show'); }, 3000); }
 
   /* ---------- AUDIO ---------- */
-  function setupAudio() { audioBtn.addEventListener('click', toggleA); }
-  function toggleA() { audioOn ? stopA() : startA(); }
-  function startA() {
+  function setupAudio() {
+    // Pre-create audio elements
+    introAudio = new Audio('referencias/músicas/intro.mp3');
+    introAudio.loop = true;
+    introAudio.volume = 0.75;
+
+    mainAudio = new Audio('referencias/músicas/Ordinary (Alex Warren)   Violin Cover by Violin Valenti - V. Valenti (youtube).mp3');
+    mainAudio.loop = true;
+    mainAudio.volume = 0;
+
+    audioBtn.addEventListener('click', toggleA);
+  }
+
+  function playIntro() {
     try {
-      if (!aCtx) aCtx = new (window.AudioContext || window.webkitAudioContext)();
-      osc = aCtx.createOscillator(); gain = aCtx.createGain();
-      osc.type = 'sine'; osc.frequency.setValueAtTime(440, aCtx.currentTime);
-      gain.gain.setValueAtTime(0, aCtx.currentTime); gain.gain.linearRampToValueAtTime(0.03, aCtx.currentTime + 1);
-      osc.connect(gain); gain.connect(aCtx.destination); osc.start();
-      audioOn = true; updIcon();
+      introAudio.play().then(function () {
+        audioOn = true;
+        updIcon();
+      }).catch(function () {});
     } catch (e) {}
   }
-  function stopA() {
-    if (gain) { gain.gain.linearRampToValueAtTime(0, aCtx.currentTime + 0.5); setTimeout(function () { if (osc) { osc.stop(); osc = null; } }, 500); }
-    audioOn = false; updIcon();
+
+  function crossfadeToMain() {
+    if (!audioOn) return;
+    mainAudio.volume = 0;
+    mainAudio.play().catch(function () {});
+
+    // Fade out intro over 2s, fade in main over 2s
+    var steps = 40;
+    var interval = 2000 / steps;
+    var step = 0;
+    var fade = setInterval(function () {
+      step++;
+      var progress = step / steps;
+      introAudio.volume = Math.max(0, 0.75 * (1 - progress));
+      mainAudio.volume = Math.min(0.5, 0.5 * progress);
+      if (step >= steps) {
+        clearInterval(fade);
+        introAudio.pause();
+        introAudio.volume = 0.75;
+      }
+    }, interval);
   }
+
+  function toggleA() { audioOn ? stopA() : startA(); }
+
+  function startA() {
+    // If envelope is still visible, play intro
+    if (envelope && !envelope.classList.contains('hidden')) {
+      playIntro();
+    } else {
+      // Envelope already gone, play main directly
+      mainAudio.volume = 0.5;
+      mainAudio.play().catch(function () {});
+      audioOn = true;
+      updIcon();
+    }
+  }
+
+  function stopA() {
+    introAudio.pause();
+    mainAudio.pause();
+    audioOn = false;
+    updIcon();
+  }
+
   function updIcon() {
     audioBtn.querySelector('.audio-on').style.display = audioOn ? 'block' : 'none';
     audioBtn.querySelector('.audio-off').style.display = audioOn ? 'none' : 'block';
