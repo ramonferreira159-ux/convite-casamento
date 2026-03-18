@@ -799,10 +799,11 @@ html, body {
 
 .dresscode-avoid {
   font-family: var(--font-serif);
-  font-size: 14px;
-  font-weight: 300;
+  font-size: 18px;
+  font-weight: 400;
   font-style: italic;
-  color: var(--text-light);
+  color: var(--text);
+  line-height: 1.6;
 }
 
 /* ==================== PAGE 5: PRESENTE ==================== */
