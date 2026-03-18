@@ -41,7 +41,11 @@
   /* ---------- ENVELOPE ---------- */
   function setupEnvelope() {
     if (!envelope) return;
-    // Auto-play intro on first user interaction anywhere
+
+    // Try autoplay immediately
+    playIntro();
+
+    // Fallback: if browser blocked autoplay, play on first interaction
     function startIntroOnce() {
       if (!audioOn) playIntro();
       document.removeEventListener('click', startIntroOnce);
@@ -51,10 +55,9 @@
     document.addEventListener('touchstart', startIntroOnce);
 
     function open() {
-      // Start intro if not already playing
       if (!audioOn) playIntro();
       envelope.classList.add('opening');
-      // Crossfade to main music
+      // Crossfade to main music when envelope opens
       setTimeout(function () { crossfadeToMain(); }, 400);
       setTimeout(function () { envelope.classList.add('hidden'); }, 1000);
     }
