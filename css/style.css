@@ -391,25 +391,9 @@ html, body {
 }
 
 .cover-body {
-  padding: 20px 32px 50px;
-  justify-content: flex-start;
-}
-
-.cover-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.cover-center {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding: 20px 32px 40px;
   justify-content: center;
-  text-align: center;
-  padding-bottom: 60px;
+  gap: 0;
 }
 
 .cover-top { margin-bottom: 10px; }
@@ -738,23 +722,44 @@ html, body {
 /* ==================== NAVIGATION ==================== */
 .nav-btn {
   position: absolute;
-  top: 50%; transform: translateY(-50%);
-  width: 34px; height: 34px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px; height: 40px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.15);
-  color: rgba(255,255,255,0.6);
+  background: rgba(74,124,138,0.2);
+  border: 1px solid rgba(201,169,110,0.35);
+  color: rgba(255,255,255,0.85);
   cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   z-index: 50;
   transition: all 0.3s;
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
 }
-.nav-btn:hover { background: rgba(255,255,255,0.15); border-color: var(--gold); color: var(--gold-light); }
-.nav-btn:disabled { opacity: 0.15; cursor: default; }
-.nav-btn svg { width: 18px; height: 18px; }
-.nav-prev { left: max(8px, calc(50% - var(--page-w)/2 - 46px)); }
-.nav-next { right: max(8px, calc(50% - var(--page-w)/2 - 46px)); }
+.nav-btn:hover {
+  background: rgba(74,124,138,0.35);
+  border-color: var(--gold);
+  color: white;
+  transform: translateY(-50%) scale(1.08);
+}
+.nav-btn:disabled { opacity: 0.12; cursor: default; animation: none !important; }
+.nav-btn svg { width: 20px; height: 20px; }
+.nav-prev { left: max(8px, calc(50% - var(--page-w)/2 - 50px)); }
+.nav-next {
+  right: max(8px, calc(50% - var(--page-w)/2 - 50px));
+  animation: navPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes navPulse {
+  0%, 100% {
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    border-color: rgba(201,169,110,0.35);
+  }
+  50% {
+    box-shadow: 0 2px 20px rgba(201,169,110,0.3), 0 0 8px rgba(201,169,110,0.15);
+    border-color: rgba(201,169,110,0.6);
+  }
+}
 
 .page-dots {
   position: absolute;
@@ -860,9 +865,9 @@ html, body {
   .nav-prev { left: 6px; }
   .nav-next { right: 6px; }
   .page-dots { bottom: 8px; }
-  .couple-names { font-size: 52px; margin-bottom: 20px; }
-  .amp { font-size: 40px; }
-  .cd-num { width: 52px; height: 52px; font-size: 24px; }
+  .couple-names { font-size: 50px; margin-bottom: 16px; }
+  .amp { font-size: 38px; }
+  .cd-num { width: 50px; height: 50px; font-size: 22px; }
   .couple-photo {
     right: -15%;
     width: 85%;
