@@ -56,6 +56,7 @@ html, body {
   cursor: pointer;
   transition: opacity 1s ease, transform 1s ease;
   overflow: hidden;
+  padding: 20px;
 }
 .envelope.opening {
   opacity: 0;
@@ -137,12 +138,14 @@ html, body {
   border: 1px solid rgba(201,169,110,0.35);
   border-radius: 6px;
   animation: fadeUp 1.2s ease-out both;
+  max-width: 380px;
+  width: 100%;
 }
 
 .env-frame-inner {
   border: 1px solid rgba(201,169,110,0.2);
   border-radius: 4px;
-  padding: 30px 40px 50px;
+  padding: 20px 36px 30px;
 }
 
 .env-content {
@@ -166,9 +169,9 @@ html, body {
 
 .envelope-title {
   font-family: var(--font-script);
-  font-size: 46px;
+  font-size: 42px;
   color: var(--gold);
-  margin-bottom: 36px;
+  margin-bottom: 20px;
 }
 
 .envelope-shell-wrap {
@@ -178,8 +181,8 @@ html, body {
 }
 
 .envelope-logo-wrap {
-  width: 140px;
-  margin: 0 auto 8px;
+  width: 120px;
+  margin: 0 auto 4px;
 }
 
 .envelope-logo {
@@ -189,8 +192,8 @@ html, body {
 
 .envelope-shell-wrap {
   position: relative;
-  width: 100px; height: 100px;
-  margin: 0 auto 24px;
+  width: 90px; height: 90px;
+  margin: 0 auto 16px;
 }
 
 .envelope-shell-img {
