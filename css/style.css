@@ -804,6 +804,14 @@ html, body {
   font-style: italic;
   color: var(--text);
   line-height: 1.6;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.avoid-icon {
+  flex-shrink: 0;
+  opacity: 0.6;
 }
 
 /* ==================== PAGE 5: PRESENTE ==================== */
